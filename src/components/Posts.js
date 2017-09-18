@@ -20,9 +20,11 @@ class Posts extends Component {
           ).length;
           return (
             <li key={post.id}>
-              <h2>{post.title}</h2>
-              <div>{commentCount} comments</div>
+              <a href={`/posts/${post.id}`}>
+                <h2>{post.title}</h2>
+              </a>
               <p>{post.body}</p>
+              <div>{commentCount} comments</div>
             </li>
           );
         })}

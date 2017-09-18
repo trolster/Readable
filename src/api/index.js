@@ -22,6 +22,10 @@ export const fetchCategories = () => {
   return callApi(`${API_ROOT}/categories`, { headers });
 };
 
+export const fetchPostById = postId => {
+  return callApi(`${API_ROOT}/posts/${postId}`, { headers });
+};
+
 export const fetchPostsByCategory = category => {
   const path = category === "all" ? "posts" : `${category}/posts`;
   return callApi(`${API_ROOT}/${path}`, { headers });

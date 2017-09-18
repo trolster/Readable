@@ -1,5 +1,5 @@
 import {
-  GET_COMMENTS_BY_POST,
+  GET_COMMENTS_BY_POST_ID,
   GET_COMMENTS_BY_POST_ID_LIST
 } from "./constants";
 import { fetchCommentsByPost } from "../api";
@@ -7,7 +7,7 @@ import { fetchCommentsByPost } from "../api";
 export const getCommentsByPostId = postId => async dispatch => {
   const response = await fetchCommentsByPost(postId);
   dispatch({
-    type: GET_COMMENTS_BY_POST,
+    type: GET_COMMENTS_BY_POST_ID,
     payload: response
   });
   return true;

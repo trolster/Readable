@@ -1,4 +1,8 @@
-import { GET_POSTS_BY_CATEGORY } from "../actions/constants";
+import { GET_POSTS_BY_CATEGORY, GET_POST_BY_ID } from "../actions/constants";
+
+const normalizePosts = posts => {
+  return posts.reduce((acc, post) => ({ ...acc, [post.id]: post }), {});
+};
 
 export default (
   state = {
@@ -11,10 +15,12 @@ export default (
     case GET_POSTS_BY_CATEGORY:
       return {
         ...state,
-        items: action.payload.reduce(
-          (acc, post) => ({ ...acc, [post.id]: post }),
-          {}
-        )
+        items: normalizePosts(action.payload)
+      };
+    case GET_POST_BY_ID:
+      return {
+        ...state,
+        items: normalizePosts([action.payload])
       };
     default:
       return state;
