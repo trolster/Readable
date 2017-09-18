@@ -6,7 +6,7 @@ const headers = {
 };
 const API_ROOT = "http://localhost:3001";
 
-const callApi = ({ url, options }) => {
+const callApi = (url, options) => {
   return fetch(url, options).then(res =>
     res.json().then(json => {
       if (!res.ok) {
