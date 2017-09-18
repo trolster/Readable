@@ -10,10 +10,22 @@ class Posts extends Component {
     });
   }
   render() {
-    console.log(this.props);
+    const posts = this.props.posts.items;
+    const comments = Object.values(this.props.comments.items);
     return (
       <ul className="posts">
-        <li>This is a list of Posts</li>
+        {Object.values(posts).map(post => {
+          const commentCount = comments.filter(
+            comment => comment.parentId === post.id
+          ).length;
+          return (
+            <li key={post.id}>
+              <h2>{post.title}</h2>
+              <div>{commentCount} comments</div>
+              <p>{post.body}</p>
+            </li>
+          );
+        })}
       </ul>
     );
   }

@@ -5,7 +5,8 @@ import {
 
 export default (
   state = {
-    defaultSort: "timestamp"
+    defaultSort: "timestamp",
+    items: {}
   },
   action
 ) => {
@@ -15,7 +16,7 @@ export default (
     case GET_COMMENTS_BY_POST_ID_LIST:
       return {
         ...state,
-        ...action.payload.reduce((acc, comments) => {
+        items: action.payload.reduce((acc, comments) => {
           const normalizedComments = comments.reduce((acc, comment) => {
             return { ...acc, [comment.id]: comment };
           }, {});
