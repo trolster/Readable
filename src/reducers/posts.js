@@ -1,6 +1,7 @@
 import {
   GET_POSTS_BY_CATEGORY,
   GET_POST_BY_ID,
+  SET_POST_SORT,
   VOTE_ON_POST
 } from "../actions/constants";
 
@@ -10,7 +11,7 @@ const normalizePosts = posts => {
 
 export default (
   state = {
-    defaultSort: "timestamp",
+    sortby: "timestamp",
     items: {}
   },
   action
@@ -25,6 +26,11 @@ export default (
       return {
         ...state,
         items: normalizePosts([action.payload])
+      };
+    case SET_POST_SORT:
+      return {
+        ...state,
+        sortby: action.payload
       };
     case VOTE_ON_POST:
       return {

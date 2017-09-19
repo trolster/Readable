@@ -1,9 +1,15 @@
 import {
   GET_COMMENTS_BY_POST_ID,
   GET_COMMENTS_BY_POST_ID_LIST,
+  SET_COMMENT_SORT,
   VOTE_ON_COMMENT
 } from "./constants";
 import { fetchCommentsByPost, saveVoteScore } from "../api";
+
+export const setCommentSort = sort => ({
+  type: SET_COMMENT_SORT,
+  payload: sort
+});
 
 export const voteOnComment = (voteType, id) => async dispatch => {
   const response = await saveVoteScore("comments", voteType, id);

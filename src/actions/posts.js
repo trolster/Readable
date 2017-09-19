@@ -1,9 +1,15 @@
 import {
   GET_POSTS_BY_CATEGORY,
   GET_POST_BY_ID,
+  SET_POST_SORT,
   VOTE_ON_POST
 } from "./constants";
 import { fetchPostsByCategory, fetchPostById, saveVoteScore } from "../api";
+
+export const setPostSort = sort => ({
+  type: SET_POST_SORT,
+  payload: sort
+});
 
 export const voteOnPost = (voteType, id) => async dispatch => {
   const response = await saveVoteScore("posts", voteType, id);

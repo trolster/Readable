@@ -1,6 +1,7 @@
 import {
   GET_COMMENTS_BY_POST_ID,
   GET_COMMENTS_BY_POST_ID_LIST,
+  SET_COMMENT_SORT,
   VOTE_ON_COMMENT
 } from "../actions/constants";
 
@@ -16,7 +17,7 @@ const normalizeComments = comments => {
 
 export default (
   state = {
-    defaultSort: "timestamp",
+    sortby: "timestamp",
     items: {}
   },
   action
@@ -30,6 +31,11 @@ export default (
         items: action.payload.reduce((acc, comments) => {
           return { ...acc, ...normalizeComments(comments) };
         }, {})
+      };
+    case SET_COMMENT_SORT:
+      return {
+        ...state,
+        sortby: action.payload
       };
     case VOTE_ON_COMMENT:
       return {
