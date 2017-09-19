@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getPostById } from "../actions/posts";
 import { getCommentsByPostId } from "../actions/comments";
+import Votes from "./Votes";
 
 class Post extends Component {
   componentDidMount() {
@@ -16,14 +17,20 @@ class Post extends Component {
         {post && (
           <div>
             <h2>{post.title}</h2>
+            <Votes postId={post.id} />
             <p>{post.body}</p>
             <div>
               {comments &&
                 comments.map(comment => {
                   return (
-                    <pre key={comment.id}>
-                      {JSON.stringify(comment, null, 4)}
-                    </pre>
+                    <div
+                      className="comment"
+                      key={comment.id}
+                      style={{ marginLeft: "40px" }}
+                    >
+                      <Votes commentId={comment.id} />
+                      <p>{comment.body}</p>
+                    </div>
                   );
                 })}
             </div>

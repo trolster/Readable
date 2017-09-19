@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { voteOnPost } from "../actions/posts";
+import { voteOnComment } from "../actions/comments";
 
 class Votes extends Component {
   itemType = this.props.postId ? "posts" : "comments";
@@ -9,8 +10,7 @@ class Votes extends Component {
     if (this.props.postId) {
       this.props.voteOnPost(voteType, this.props.postId);
     } else {
-      console.log("voting on comment");
-      // this.props.voteOnComment(voteType, this.props.commentId);
+      this.props.voteOnComment(voteType, this.props.commentId);
     }
   }
   render() {
@@ -24,4 +24,4 @@ class Votes extends Component {
   }
 }
 
-export default connect(state => state, { voteOnPost })(Votes);
+export default connect(state => state, { voteOnPost, voteOnComment })(Votes);
