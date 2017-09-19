@@ -3,6 +3,7 @@ export const GET_CATEGORIES = "GET_CATEGORIES";
 // Posts
 export const GET_POST_BY_ID = "GET_POST_BY_ID";
 export const GET_POSTS_BY_CATEGORY = "GET_POSTS_BY_CATEGORY";
+export const VOTE_ON_POST = "VOTE_ON_POST";
 // Comments
 export const GET_COMMENTS_BY_POST_ID = "GET_COMMENTS_BY_POST_ID";
 export const GET_COMMENTS_BY_POST_ID_LIST = "GET_COMMENTS_BY_POST_ID_LIST";

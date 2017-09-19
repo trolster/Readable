@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getPostsByCategory } from "../actions/posts";
 import { getCommentsByPostIdList } from "../actions/comments";
+import Votes from "./Votes";
 
 class Posts extends Component {
   componentDidMount() {
@@ -23,6 +24,7 @@ class Posts extends Component {
               <a href={`/posts/${post.id}`}>
                 <h2>{post.title}</h2>
               </a>
+              <Votes postId={post.id} />
               <p>{post.body}</p>
               <div>{commentCount} comments</div>
             </li>

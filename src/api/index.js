@@ -7,7 +7,7 @@ const headers = {
 const API_ROOT = "http://localhost:3001";
 
 const callApi = (url, options) => {
-  return fetch(url, options).then(res =>
+  return fetch(`${API_ROOT}/${url}`, options).then(res =>
     res.json().then(json => {
       if (!res.ok) {
         return Promise.reject(json);
@@ -18,19 +18,27 @@ const callApi = (url, options) => {
 };
 
 // API requests
+export const saveVoteScore = (itemType, voteType, id) => {
+  return callApi(`${itemType}/${id}`, {
+    headers,
+    method: "POST",
+    body: JSON.stringify({ option: voteType })
+  });
+};
+
 export const fetchCategories = () => {
-  return callApi(`${API_ROOT}/categories`, { headers });
+  return callApi("categories", { headers });
 };
 
 export const fetchPostById = postId => {
-  return callApi(`${API_ROOT}/posts/${postId}`, { headers });
+  return callApi(`posts/${postId}`, { headers });
 };
 
 export const fetchPostsByCategory = category => {
   const path = category === "all" ? "posts" : `${category}/posts`;
-  return callApi(`${API_ROOT}/${path}`, { headers });
+  return callApi(path, { headers });
 };
 
 export const fetchCommentsByPost = postId => {
-  return callApi(`${API_ROOT}/posts/${postId}/comments`, { headers });
+  return callApi(`posts/${postId}/comments`, { headers });
 };
