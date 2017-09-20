@@ -8,6 +8,7 @@ import { getCommentsByPostIdList } from "../actions/comments";
 import { Link } from "react-router-dom";
 import { Segment, Container, Header, Comment, Icon } from "semantic-ui-react";
 import Votes from "./Votes";
+import Sort from "./Sort";
 
 class Posts extends Component {
   componentDidMount() {
@@ -23,14 +24,7 @@ class Posts extends Component {
       <Segment basic>
         <Container text>
           <Header as="h3">{startCase(this.props.category)} Posts</Header>
-          Sorted by
-          <select
-            defaultValue={this.props.posts.sortby}
-            onChange={e => this.props.setPostSort(e.target.value)}
-          >
-            <option value="timestamp">Most Recent</option>
-            <option value="voteScore">Most Popular</option>
-          </select>
+          {posts.length > 1 && <Sort itemType="posts" />}
           <Comment.Group>
             {posts.map(post => {
               const commentCount = comments.filter(

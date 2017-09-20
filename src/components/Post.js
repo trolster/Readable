@@ -6,6 +6,7 @@ import { Segment, Container, Comment, Header } from "semantic-ui-react";
 import { getPostById } from "../actions/posts";
 import { getCommentsByPostId, setCommentSort } from "../actions/comments";
 import Votes from "./Votes";
+import Sort from "./Sort";
 
 class Post extends Component {
   state = {
@@ -33,9 +34,6 @@ class Post extends Component {
                     <Comment.Metadata>
                       posted {moment(post.timestamp).fromNow()}
                     </Comment.Metadata>
-                    <Comment.Metadata
-                      style={{ display: "block", margin: ".33em 0" }}
-                    />
                     <Header as="h3" style={{ margin: ".33em 0" }}>
                       {post.title}
                     </Header>
@@ -43,15 +41,7 @@ class Post extends Component {
                   </Comment.Content>
                   {comments && (
                     <Comment.Group>
-                      Sorted by
-                      <select
-                        defaultValue={this.props.comments.sortby}
-                        onChange={e =>
-                          this.props.setCommentSort(e.target.value)}
-                      >
-                        <option value="timestamp">Most Recent</option>
-                        <option value="voteScore">Most Popular</option>
-                      </select>
+                      <Sort itemType="comments" />
                       {comments.map(comment => {
                         return (
                           <div
