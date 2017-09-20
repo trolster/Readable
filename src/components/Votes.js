@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Icon } from "semantic-ui-react";
 import { voteOnPost } from "../actions/posts";
 import { voteOnComment } from "../actions/comments";
 
@@ -15,10 +16,30 @@ class Votes extends Component {
   }
   render() {
     return (
-      <div className="votes">
-        <button onClick={() => this.handleVote("downVote")}> - </button>
-        {this.props[this.itemType].items[this.id].voteScore}
-        <button onClick={() => this.handleVote("upVote")}> + </button>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          width: "30px",
+          marginTop: "16px"
+        }}
+      >
+        <div>
+          <Icon
+            onClick={() => this.handleVote("upVote")}
+            name="up arrow"
+            style={{ marginRight: 0, cursor: "pointer" }}
+          />
+        </div>
+        <div>{this.props[this.itemType].items[this.id].voteScore}</div>
+        <div>
+          <Icon
+            onClick={() => this.handleVote("downVote")}
+            name="down arrow"
+            style={{ marginRight: 0, cursor: "pointer" }}
+          />
+        </div>
       </div>
     );
   }

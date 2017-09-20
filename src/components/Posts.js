@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import sortBy from "lodash.sortby";
+import startCase from "lodash.startcase";
 import moment from "moment";
 import { getPostsByCategory, setPostSort } from "../actions/posts";
 import { getCommentsByPostIdList } from "../actions/comments";
+import { Link } from "react-router-dom";
+import { Segment, Container, Header, Comment, Icon } from "semantic-ui-react";
 import Votes from "./Votes";
 
 class Posts extends Component {
@@ -17,34 +20,59 @@ class Posts extends Component {
     const posts = sortBy(Object.values(items), sortby).reverse();
     const comments = Object.values(this.props.comments.items);
     return (
-      <div className="posts">
-        Sorted by
-        <select
-          defaultValue={this.props.posts.sortby}
-          onChange={e => this.props.setPostSort(e.target.value)}
-        >
-          <option value="timestamp">Most Recent</option>
-          <option value="voteScore">Most Popular</option>
-        </select>
-        <ul>
-          {posts.map(post => {
-            const commentCount = comments.filter(
-              comment => comment.parentId === post.id
-            ).length;
-            return (
-              <li key={post.id}>
-                <a href={`/posts/${post.id}`}>
-                  <h2>{post.title}</h2>
-                </a>
-                posted {moment(post.timestamp).fromNow()}
-                <Votes postId={post.id} />
-                <p>{post.body}</p>
-                <div>{commentCount} comments</div>
-              </li>
-            );
-          })}
-        </ul>
-      </div>
+      <Segment basic>
+        <Container text>
+          <Header as="h3">{startCase(this.props.category)} Posts</Header>
+          Sorted by
+          <select
+            defaultValue={this.props.posts.sortby}
+            onChange={e => this.props.setPostSort(e.target.value)}
+          >
+            <option value="timestamp">Most Recent</option>
+            <option value="voteScore">Most Popular</option>
+          </select>
+          <Comment.Group>
+            {posts.map(post => {
+              const commentCount = comments.filter(
+                comment => comment.parentId === post.id
+              ).length;
+              const { author, timestamp, body, title, id, category } = post;
+
+              return (
+                <div style={{ display: "flex", flexAlign: "row" }} key={id}>
+                  <Votes postId={post.id} />
+                  <Comment style={{ marginLeft: "15px" }}>
+                    <Comment.Avatar src="http://via.placeholder.com/35" />
+                    <Comment.Content>
+                      <Comment.Author as="a">
+                        {author}
+                        <Comment.Metadata>
+                          posted {moment(timestamp).fromNow()}
+                        </Comment.Metadata>
+                      </Comment.Author>
+                      <Comment.Metadata
+                        style={{ display: "block", margin: ".33em 0" }}
+                      >
+                        <Icon
+                          name="comment outline"
+                          style={{ margin: "0 4px -4px 0" }}
+                        />
+                        {commentCount} Comments
+                      </Comment.Metadata>
+                      <Link to={`/${category}/${id}`}>
+                        <Header as="h3" style={{ margin: ".33em 0" }}>
+                          {title}
+                        </Header>
+                        <Comment.Text>{body.substring(0, 120)}...</Comment.Text>
+                      </Link>
+                    </Comment.Content>
+                  </Comment>
+                </div>
+              );
+            })}
+          </Comment.Group>
+        </Container>
+      </Segment>
     );
   }
 }
