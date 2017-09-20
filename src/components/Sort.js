@@ -25,6 +25,7 @@ class Sort extends Component {
           options={sortOptions}
           placeholder="Select sort order..."
           onChange={this.handleSort}
+          width="1"
         />
       </Form>
     );

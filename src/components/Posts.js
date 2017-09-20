@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import { Segment, Container, Header, Comment, Icon } from "semantic-ui-react";
 import Votes from "./Votes";
 import Sort from "./Sort";
+import PostForm from "./PostForm";
 
 class Posts extends Component {
   componentDidMount() {
@@ -24,6 +25,7 @@ class Posts extends Component {
       <Segment basic>
         <Container text>
           <Header as="h3">{startCase(this.props.category)} Posts</Header>
+          <PostForm />
           {posts.length > 1 && <Sort itemType="posts" />}
           <Comment.Group>
             {posts.map(post => {
