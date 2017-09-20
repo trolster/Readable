@@ -8,15 +8,11 @@ class Layout extends Component {
     this.props.getCategories();
   }
   render() {
-    const { post_id, category } = this.props.match.params;
+    const { post_id, category = "all" } = this.props.match.params;
     return (
       <div>
-        <Navigation category={category || "all"} />
-        {post_id ? (
-          <Post postId={post_id} />
-        ) : (
-          <Posts category={category || "all"} />
-        )}
+        <Navigation category={category} />
+        {post_id ? <Post postId={post_id} /> : <Posts category={category} />}
       </div>
     );
   }
