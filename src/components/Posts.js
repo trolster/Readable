@@ -44,7 +44,7 @@ class Posts extends Component {
                   <Comment style={{ marginLeft: "15px" }}>
                     <Comment.Avatar src="http://via.placeholder.com/35" />
                     <Comment.Content>
-                      <Comment.Author as="a">
+                      <Comment.Author>
                         {author}
                         <Comment.Metadata>
                           posted {moment(timestamp).fromNow()}
