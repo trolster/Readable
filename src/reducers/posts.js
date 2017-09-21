@@ -47,7 +47,10 @@ export default (
         items: { ...state.items, [action.payload.id]: action.payload }
       };
     case CREATE_POST:
-      return state;
+      return {
+        ...state,
+        items: { ...state.items, [action.payload.id]: action.payload }
+      };
     case DELETE_POST:
       return { ...state, items: omit(state.items, action.payload.id) };
     default:

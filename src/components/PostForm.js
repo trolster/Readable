@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import { Segment, Form, Button, Select } from "semantic-ui-react";
 import { connect } from "react-redux";
-import { editPost } from "../actions/posts";
+import { editPost, createNewPost } from "../actions/posts";
 
 const defaultPost = {
-  category: "",
   author: "",
   title: "",
   body: ""
@@ -14,7 +13,7 @@ class PostForm extends Component {
   state = {
     post: !!this.props.postId
       ? this.props.posts.items[this.props.postId]
-      : defaultPost,
+      : { ...defaultPost, category: this.props.category },
     editing: !!this.props.postId
   };
 
@@ -26,8 +25,11 @@ class PostForm extends Component {
   handleSubmit = e => {
     if (this.props.postId) {
       this.props.handleEditingStateChange(e);
+      this.props.editPost(this.state.post);
+    } else {
+      this.props.createNewPost(this.state.post);
+      this.setState({ post: defaultPost });
     }
-    this.props.editPost(this.state.post);
   };
 
   render() {
@@ -91,4 +93,4 @@ class PostForm extends Component {
   }
 }
 
-export default connect(state => state, { editPost })(PostForm);
+export default connect(state => state, { editPost, createNewPost })(PostForm);
