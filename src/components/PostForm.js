@@ -17,13 +17,10 @@ class PostForm extends Component {
       : defaultPost,
     editing: !!this.props.postId
   };
+
   handleChange = (e, { name, value }) => {
     e.preventDefault();
     this.setState({ post: { ...this.state.post, [name]: value } });
-  };
-
-  handleDelete = e => {
-    console.log("Deleting Post");
   };
 
   handleSubmit = e => {
@@ -81,20 +78,12 @@ class PostForm extends Component {
             onClick={this.handleSubmit}
           />
           {this.state.editing && (
-            <span>
-              <Button
-                content="Delete"
-                basic
-                floated="right"
-                onClick={this.handleDelete}
-              />
-              <Button
-                content="Cancel"
-                basic
-                floated="right"
-                onClick={this.props.handleEditingStateChange}
-              />
-            </span>
+            <Button
+              content="Cancel"
+              basic
+              floated="right"
+              onClick={this.props.handleEditingStateChange}
+            />
           )}
         </Form>
       </Segment>

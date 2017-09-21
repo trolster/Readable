@@ -3,19 +3,34 @@ import {
   GET_POST_BY_ID,
   SET_POST_SORT,
   VOTE_ON_POST,
-  EDIT_POST
+  EDIT_POST,
+  CREATE_POST,
+  DELETE_POST
 } from "./constants";
 import {
   fetchPostsByCategory,
   fetchPostById,
   saveVoteScore,
-  saveEditedPost
+  saveEditedPost,
+  saveNewPost,
+  removePost
 } from "../api";
 
-export const setPostSort = sort => ({
-  type: SET_POST_SORT,
-  payload: sort
-});
+export const deletePost = postId => async dispatch => {
+  const response = await removePost(postId);
+  dispatch({
+    type: DELETE_POST,
+    payload: response
+  });
+};
+
+export const createNewPost = post => async dispatch => {
+  const response = await saveNewPost(post);
+  dispatch({
+    type: CREATE_POST,
+    payload: response
+  });
+};
 
 export const editPost = post => async dispatch => {
   const response = await saveEditedPost(post);
@@ -53,3 +68,8 @@ export const getPostById = postId => async dispatch => {
   });
   return postId;
 };
+
+export const setPostSort = sort => ({
+  type: SET_POST_SORT,
+  payload: sort
+});

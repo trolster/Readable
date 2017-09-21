@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import sortBy from "lodash.sortby";
 import moment from "moment";
 import { Segment, Container, Comment, Header } from "semantic-ui-react";
-import { getPostById } from "../actions/posts";
+import { getPostById, deletePost } from "../actions/posts";
 import { getCommentsByPostId, setCommentSort } from "../actions/comments";
 import Votes from "./Votes";
 import Sort from "./Sort";
@@ -14,15 +14,17 @@ import CommentForm from "./CommentForm";
 class Post extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       editing: false
     };
-
     this.handleEditingStateChange = this.handleEditingStateChange.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
+  }
+  handleDelete() {
+    this.props.deletePost(this.props.postId);
   }
   handleEditingStateChange(e) {
-    if (e) e.preventDefault();
+    e.preventDefault();
     this.setState({ editing: !this.state.editing });
   }
   componentDidMount() {
@@ -53,13 +55,12 @@ class Post extends Component {
                       </Header>
                       <Comment.Text>{post.body}</Comment.Text>
                       <Comment.Actions>
-                        {!this.state.editing && (
-                          <Comment.Action
-                            onClick={this.handleEditingStateChange}
-                          >
-                            Edit
-                          </Comment.Action>
-                        )}
+                        <Comment.Action onClick={this.handleEditingStateChange}>
+                          Edit
+                        </Comment.Action>
+                        <Comment.Action onClick={this.handleDelete}>
+                          Delete
+                        </Comment.Action>
                       </Comment.Actions>
                     </Comment.Content>
                     {comments && (
@@ -94,6 +95,7 @@ class Post extends Component {
 
 export default connect(state => state, {
   getPostById,
+  deletePost,
   getCommentsByPostId,
   setCommentSort
 })(Post);

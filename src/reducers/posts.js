@@ -1,9 +1,12 @@
+import omit from "lodash.omit";
 import {
   GET_POSTS_BY_CATEGORY,
   GET_POST_BY_ID,
   SET_POST_SORT,
   VOTE_ON_POST,
-  EDIT_POST
+  EDIT_POST,
+  CREATE_POST,
+  DELETE_POST
 } from "../actions/constants";
 
 const normalizePosts = posts => {
@@ -43,6 +46,10 @@ export default (
         ...state,
         items: { ...state.items, [action.payload.id]: action.payload }
       };
+    case CREATE_POST:
+      return state;
+    case DELETE_POST:
+      return { ...state, items: omit(state.items, action.payload.id) };
     default:
       return state;
   }
