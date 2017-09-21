@@ -21,7 +21,7 @@ const normalizeComments = comments => {
 
 export default (
   state = {
-    sortby: "timestamp",
+    sortby: "voteScore",
     items: {}
   },
   action

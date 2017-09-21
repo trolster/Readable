@@ -15,7 +15,7 @@ const normalizePosts = posts => {
 
 export default (
   state = {
-    sortby: "timestamp",
+    sortby: "voteScore",
     items: {}
   },
   action
