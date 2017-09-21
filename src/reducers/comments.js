@@ -1,8 +1,12 @@
+import omit from "lodash.omit";
 import {
   GET_COMMENTS_BY_POST_ID,
   GET_COMMENTS_BY_POST_ID_LIST,
   SET_COMMENT_SORT,
-  VOTE_ON_COMMENT
+  VOTE_ON_COMMENT,
+  EDIT_COMMENT,
+  CREATE_COMMENT,
+  DELETE_COMMENT
 } from "../actions/constants";
 
 // Gives the comments.items property a shape of:
@@ -42,6 +46,18 @@ export default (
         ...state,
         items: { ...state.items, [action.payload.id]: action.payload }
       };
+    case EDIT_COMMENT:
+      return {
+        ...state,
+        items: { ...state.items, [action.payload.id]: action.payload }
+      };
+    case CREATE_COMMENT:
+      return {
+        ...state,
+        items: { ...state.items, [action.payload.id]: action.payload }
+      };
+    case DELETE_COMMENT:
+      return { ...state, items: omit(state.items, action.payload.id) };
     default:
       return state;
   }

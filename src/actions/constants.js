@@ -1,12 +1,20 @@
 // Categories
 export const GET_CATEGORIES = "GET_CATEGORIES";
+
 // Posts
 export const GET_POST_BY_ID = "GET_POST_BY_ID";
 export const GET_POSTS_BY_CATEGORY = "GET_POSTS_BY_CATEGORY";
 export const SET_POST_SORT = "SET_POST_SORT";
 export const VOTE_ON_POST = "VOTE_ON_POST";
+export const EDIT_POST = "EDIT_POST";
+export const CREATE_POST = "CREATE_POST";
+export const DELETE_POST = "DELETE_POST";
+
 // Comments
 export const GET_COMMENTS_BY_POST_ID = "GET_COMMENTS_BY_POST_ID";
 export const GET_COMMENTS_BY_POST_ID_LIST = "GET_COMMENTS_BY_POST_ID_LIST";
 export const SET_COMMENT_SORT = "SET_COMMENT_SORT";
 export const VOTE_ON_COMMENT = "VOTE_ON_COMMENT";
+export const EDIT_COMMENT = "EDIT_COMMENT";
+export const CREATE_COMMENT = "CREATE_COMMENT";
+export const DELETE_COMMENT = "DELETE_COMMENT";

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Segment, Form, Button, Select } from "semantic-ui-react";
 import { connect } from "react-redux";
+import { editPost } from "../actions/posts";
 
 const defaultPost = {
   category: "",
@@ -14,19 +15,22 @@ class PostForm extends Component {
     post: !!this.props.postId
       ? this.props.posts.items[this.props.postId]
       : defaultPost,
-    isEditing: !!this.props.postId,
-    submitted: false
+    editing: !!this.props.postId
   };
-  handleChange = (e, { name, value }) => console.log(this.props);
+  handleChange = (e, { name, value }) => {
+    e.preventDefault();
+    this.setState({ post: { ...this.state.post, [name]: value } });
+  };
 
   handleDelete = e => {
     console.log("Deleting Post");
   };
 
   handleSubmit = e => {
-    setTimeout(() => {
-      console.log(this.props);
-    }, 2000);
+    if (this.props.postId) {
+      this.props.handleEditingStateChange(e);
+    }
+    this.props.editPost(this.state.post);
   };
 
   render() {
@@ -34,11 +38,7 @@ class PostForm extends Component {
     const category = this.props.category === "all" ? "" : this.props.category;
     return (
       <Segment>
-        <Form
-          reply
-          loading={this.state.submitted}
-          style={{ margin: "15px 0 0 15px" }}
-        >
+        <Form reply style={{ margin: "15px 0 0 15px" }}>
           <Form.Group>
             <Form.Field
               control={Select}
@@ -51,14 +51,14 @@ class PostForm extends Component {
               name="category"
               placeholder="Category"
               onChange={this.handleChange}
-              disabled={this.state.isEditing}
+              disabled={this.state.editing}
             />
             <Form.Input
               placeholder="Name"
               name="author"
               value={author}
               onChange={this.handleChange}
-              disabled={this.state.isEditing}
+              disabled={this.state.editing}
             />
           </Form.Group>
           <Form.Input
@@ -74,13 +74,13 @@ class PostForm extends Component {
             onChange={this.handleChange}
           />
           <Button
-            content={this.state.isEditing ? "Submit" : "Add New Post"}
+            content={this.state.editing ? "Submit" : "Add New Post"}
             labelPosition="left"
             icon="edit"
             primary
             onClick={this.handleSubmit}
           />
-          {this.state.isEditing && (
+          {this.state.editing && (
             <span>
               <Button
                 content="Delete"
@@ -102,4 +102,4 @@ class PostForm extends Component {
   }
 }
 
-export default connect(state => state)(PostForm);
+export default connect(state => state, { editPost })(PostForm);

@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
+    "lodash.omit": "^4.5.0",
     "lodash.sortby": "^4.7.0",
     "lodash.startcase": "^4.4.0",
     "moment": "^2.18.1",
@@ -13,7 +14,8 @@
     "react-scripts": "1.0.13",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
-    "semantic-ui-react": "^0.73.1"
+    "semantic-ui-react": "^0.73.1",
+    "uuid": "^3.1.0"
   },
   "devDependencies": {
     "eslint-config-prettier": "^2.3.0",

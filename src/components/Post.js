@@ -2,12 +2,14 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import sortBy from "lodash.sortby";
 import moment from "moment";
-import { Segment, Container, Comment, Header, Button } from "semantic-ui-react";
+import { Segment, Container, Comment, Header } from "semantic-ui-react";
 import { getPostById } from "../actions/posts";
 import { getCommentsByPostId, setCommentSort } from "../actions/comments";
 import Votes from "./Votes";
 import Sort from "./Sort";
 import PostForm from "./PostForm";
+import CommentItem from "./CommentItem";
+import CommentForm from "./CommentForm";
 
 class Post extends Component {
   constructor(props) {
@@ -20,7 +22,7 @@ class Post extends Component {
     this.handleEditingStateChange = this.handleEditingStateChange.bind(this);
   }
   handleEditingStateChange(e) {
-    e.preventDefault();
+    if (e) e.preventDefault();
     this.setState({ editing: !this.state.editing });
   }
   componentDidMount() {
@@ -55,7 +57,7 @@ class Post extends Component {
                           <Comment.Action
                             onClick={this.handleEditingStateChange}
                           >
-                            <Button basic content="Edit" />
+                            Edit
                           </Comment.Action>
                         )}
                       </Comment.Actions>
@@ -65,26 +67,10 @@ class Post extends Component {
                         {comments.length > 1 && <Sort itemType="comments" />}
                         {comments.map(comment => {
                           return (
-                            <div
-                              style={{ display: "flex", flexAlign: "row" }}
+                            <CommentItem
                               key={comment.id}
-                            >
-                              <Votes commentId={comment.id} />
-                              <Comment style={{ marginLeft: "15px" }}>
-                                <Comment.Content>
-                                  <Comment.Author as="a">
-                                    {comment.author}
-                                  </Comment.Author>
-                                  <Comment.Metadata>
-                                    posted {moment(comment.timestamp).fromNow()}
-                                  </Comment.Metadata>
-                                  <Comment.Text>{comment.body}</Comment.Text>
-                                  <Comment.Actions>
-                                    <Comment.Action>Edit</Comment.Action>
-                                  </Comment.Actions>
-                                </Comment.Content>
-                              </Comment>
-                            </div>
+                              commentId={comment.id}
+                            />
                           );
                         })}
                       </Comment.Group>
@@ -99,6 +85,7 @@ class Post extends Component {
               handleEditingStateChange={this.handleEditingStateChange}
             />
           )}
+          {post && <CommentForm postId={post.id} />}
         </Container>
       </Segment>
     );
