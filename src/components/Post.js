@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import sortBy from "lodash.sortby";
 import moment from "moment";
-import { Segment, Container, Comment, Header } from "semantic-ui-react";
+import { Segment, Container, Comment, Header, Button } from "semantic-ui-react";
 import { getPostById } from "../actions/posts";
 import { getCommentsByPostId, setCommentSort } from "../actions/comments";
 import Votes from "./Votes";
@@ -10,9 +10,19 @@ import Sort from "./Sort";
 import PostForm from "./PostForm";
 
 class Post extends Component {
-  state = {
-    editing: true
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      editing: false
+    };
+
+    this.handleEditingStateChange = this.handleEditingStateChange.bind(this);
+  }
+  handleEditingStateChange(e) {
+    e.preventDefault();
+    this.setState({ editing: !this.state.editing });
+  }
   componentDidMount() {
     this.props.getPostById(this.props.postId);
     this.props.getCommentsByPostId(this.props.postId);
@@ -24,10 +34,10 @@ class Post extends Component {
     return (
       <Segment basic>
         <Container text>
-          {post && (
-            <div style={{ display: "flex", flexAlign: "row" }} key={post.id}>
-              <Votes postId={post.id} />
-              {!this.state.editing && (
+          {post &&
+            (!this.state.editing && (
+              <div style={{ display: "flex", flexAlign: "row" }} key={post.id}>
+                <Votes postId={post.id} />
                 <Comment.Group>
                   <Comment style={{ marginLeft: "15px" }}>
                     <Comment.Avatar src="http://via.placeholder.com/35" />
@@ -40,10 +50,19 @@ class Post extends Component {
                         {post.title}
                       </Header>
                       <Comment.Text>{post.body}</Comment.Text>
+                      <Comment.Actions>
+                        {!this.state.editing && (
+                          <Comment.Action
+                            onClick={this.handleEditingStateChange}
+                          >
+                            <Button basic content="Edit" />
+                          </Comment.Action>
+                        )}
+                      </Comment.Actions>
                     </Comment.Content>
                     {comments && (
                       <Comment.Group>
-                        <Sort itemType="comments" />
+                        {comments.length > 1 && <Sort itemType="comments" />}
                         {comments.map(comment => {
                           return (
                             <div
@@ -72,9 +91,13 @@ class Post extends Component {
                     )}
                   </Comment>
                 </Comment.Group>
-              )}
-              {this.state.editing && <PostForm postId={post.id} />}
-            </div>
+              </div>
+            ))}
+          {this.state.editing && (
+            <PostForm
+              postId={post.id}
+              handleEditingStateChange={this.handleEditingStateChange}
+            />
           )}
         </Container>
       </Segment>

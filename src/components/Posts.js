@@ -25,7 +25,6 @@ class Posts extends Component {
       <Segment basic>
         <Container text>
           <Header as="h3">{startCase(this.props.category)} Posts</Header>
-          <PostForm />
           {posts.length > 1 && <Sort itemType="posts" />}
           <Comment.Group>
             {posts.map(post => {
@@ -67,6 +66,7 @@ class Posts extends Component {
               );
             })}
           </Comment.Group>
+          <PostForm category={this.props.category} />
         </Container>
       </Segment>
     );

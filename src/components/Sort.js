@@ -19,12 +19,13 @@ class Sort extends Component {
   };
   render() {
     return (
-      <Form style={{ float: "right" }} size="mini">
+      <Form style={{ margin: "15px 0 0 0" }} size="mini">
         <Form.Field
           control={Select}
           options={sortOptions}
           placeholder="Select sort order..."
           onChange={this.handleSort}
+          width="1"
         />
       </Form>
     );
