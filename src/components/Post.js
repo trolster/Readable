@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { Segment, Container, Loader, Dimmer } from "semantic-ui-react";
+import { Segment, Container } from "semantic-ui-react";
 import { getPostById } from "../actions/posts";
 import { getCommentsByPostId } from "../actions/comments";
 import PostForm from "./PostForm";
 import PostItem from "./PostItem";
 import CommentForm from "./CommentForm";
+import Spinner from "./Spinner";
 
 class Post extends Component {
   constructor(props) {
@@ -62,11 +63,7 @@ class Post extends Component {
         </Segment>
       );
     }
-    return (
-      <Dimmer active inverted>
-        <Loader inverted>Loading Content</Loader>
-      </Dimmer>
-    );
+    return <Spinner />;
   }
 }
 
