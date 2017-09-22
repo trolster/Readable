@@ -1,15 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import sortBy from "lodash.sortby";
-import moment from "moment";
-import { Segment, Container, Comment, Header } from "semantic-ui-react";
-import { getPostById, deletePost } from "../actions/posts";
-import { getCommentsByPostId, setCommentSort } from "../actions/comments";
-import Votes from "./Votes";
-import Sort from "./Sort";
+import { Segment, Container, Loader, Dimmer } from "semantic-ui-react";
+import { getPostById } from "../actions/posts";
+import { getCommentsByPostId } from "../actions/comments";
 import PostForm from "./PostForm";
-import CommentItem from "./CommentItem";
+import PostItem from "./PostItem";
 import CommentForm from "./CommentForm";
 
 class Post extends Component {
@@ -20,14 +16,6 @@ class Post extends Component {
       redirect: false
     };
     this.handleEditingStateChange = this.handleEditingStateChange.bind(this);
-    this.handleDelete = this.handleDelete.bind(this);
-  }
-
-  handleDelete() {
-    this.setState({ redirect: true, deleted: true });
-    this.props.deletePost(this.props.postId).catch(error => {
-      console.log(error);
-    });
   }
 
   handleEditingStateChange(e) {
@@ -49,79 +37,40 @@ class Post extends Component {
 
   render() {
     if (this.state.redirect) {
-      if (this.state.deleted) {
-        return <Redirect to="/" />;
-      }
       return <Redirect to="/404" />;
     }
+
     const post = this.props.posts.items[this.props.postId];
-    const { items, sortby } = this.props.comments;
-    const comments = sortBy(
-      // Start by filtering out the comments that aren't for this post.
-      Object.values(items).filter(comment => comment.parentId === post.id),
-      sortby
-    ).reverse();
+    if (post) {
+      return (
+        <Segment basic>
+          <Container text>
+            {!this.state.editing && (
+              <PostItem
+                postId={post.id}
+                handleEditingStateChange={this.handleEditingStateChange}
+              />
+            )}
+            {this.state.editing && (
+              <PostForm
+                postId={post.id}
+                handleEditingStateChange={this.handleEditingStateChange}
+              />
+            )}
+            <CommentForm postId={post.id} />
+          </Container>
+        </Segment>
+      );
+    }
     return (
-      <Segment basic>
-        <Container text>
-          {post &&
-            (!this.state.editing && (
-              <div style={{ display: "flex", flexAlign: "row" }} key={post.id}>
-                <Votes postId={post.id} />
-                <Comment.Group>
-                  <Comment style={{ marginLeft: "15px" }}>
-                    <Comment.Avatar src="http://via.placeholder.com/35" />
-                    <Comment.Content>
-                      <Comment.Author>{post.author}</Comment.Author>
-                      <Comment.Metadata>
-                        posted {moment(post.timestamp).fromNow()}
-                      </Comment.Metadata>
-                      <Header as="h3" style={{ margin: ".33em 0" }}>
-                        {post.title}
-                      </Header>
-                      <Comment.Text>{post.body}</Comment.Text>
-                      <Comment.Actions>
-                        <Comment.Action onClick={this.handleEditingStateChange}>
-                          Edit
-                        </Comment.Action>
-                        <Comment.Action onClick={this.handleDelete}>
-                          Delete
-                        </Comment.Action>
-                      </Comment.Actions>
-                    </Comment.Content>
-                    {comments && (
-                      <Comment.Group>
-                        {comments.length > 1 && <Sort itemType="comments" />}
-                        {comments.map(comment => {
-                          return (
-                            <CommentItem
-                              key={comment.id}
-                              commentId={comment.id}
-                            />
-                          );
-                        })}
-                      </Comment.Group>
-                    )}
-                  </Comment>
-                </Comment.Group>
-              </div>
-            ))}
-          {this.state.editing && (
-            <PostForm
-              postId={post.id}
-              handleEditingStateChange={this.handleEditingStateChange}
-            />
-          )}
-          {post && <CommentForm postId={post.id} />}
-        </Container>
-      </Segment>
+      <Dimmer active inverted>
+        <Loader inverted>Loading Content</Loader>
+      </Dimmer>
     );
   }
 }
 
 export default connect(state => state, {
   getPostById,
-  deletePost,
-  getCommentsByPostId,
-  setCommentSort
+  getCommentsByPostId
 })(Post);
