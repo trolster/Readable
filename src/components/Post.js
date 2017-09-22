@@ -20,21 +20,33 @@ class Post extends Component {
     this.handleEditingStateChange = this.handleEditingStateChange.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
   }
+
   handleDelete() {
     this.props.deletePost(this.props.postId);
   }
+
   handleEditingStateChange(e) {
     e.preventDefault();
     this.setState({ editing: !this.state.editing });
   }
+
   componentDidMount() {
-    this.props.getPostById(this.props.postId);
-    this.props.getCommentsByPostId(this.props.postId);
+    // If the user navigates to the page from a bookmark, we load post and
+    // comments.
+    if (!this.props.posts.items[this.props.postId]) {
+      this.props.getPostById(this.props.postId);
+      this.props.getCommentsByPostId(this.props.postId);
+    }
   }
+
   render() {
     const post = this.props.posts.items[this.props.postId];
     const { items, sortby } = this.props.comments;
-    const comments = sortBy(Object.values(items), sortby).reverse();
+    const comments = sortBy(
+      // Start by filtering out the comments that aren't for this post.
+      Object.values(items).filter(comment => comment.parentId === post.id),
+      sortby
+    ).reverse();
     return (
       <Segment basic>
         <Container text>
