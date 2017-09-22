@@ -2,11 +2,11 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { setCommentSort } from "../actions/comments";
 import { setPostSort } from "../actions/posts";
-import { Form, Select } from "semantic-ui-react";
+import { Form } from "semantic-ui-react";
 
 const sortOptions = [
-  { key: "timestamp", text: "Most Recent", value: "timestamp" },
-  { key: "voteScore", text: "Most Popular", value: "voteScore" }
+  { key: "voteScore", text: "Most Popular", value: "voteScore" },
+  { key: "timestamp", text: "Most Recent", value: "timestamp" }
 ];
 
 class Sort extends Component {
@@ -19,13 +19,13 @@ class Sort extends Component {
   };
   render() {
     return (
-      <Form style={{ margin: "15px 0 0 0" }} size="mini">
-        <Form.Field
-          control={Select}
+      <Form style={{ textAlign: "right" }} size="mini">
+        <Form.Select
+          inline
           options={sortOptions}
-          placeholder="Select sort order..."
+          value={this.props[this.props.itemType].sortby}
+          label="Sorted by "
           onChange={this.handleSort}
-          width="1"
         />
       </Form>
     );
