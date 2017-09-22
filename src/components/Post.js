@@ -24,7 +24,10 @@ class Post extends Component {
   }
 
   handleDelete() {
-    this.props.deletePost(this.props.postId);
+    this.setState({ redirect: true, deleted: true });
+    this.props.deletePost(this.props.postId).catch(error => {
+      console.log(error);
+    });
   }
 
   handleEditingStateChange(e) {
@@ -46,7 +49,10 @@ class Post extends Component {
 
   render() {
     if (this.state.redirect) {
-      return <Redirect to="/404" error={this.state.error} />;
+      if (this.state.deleted) {
+        return <Redirect to="/" />;
+      }
+      return <Redirect to="/404" />;
     }
     const post = this.props.posts.items[this.props.postId];
     const { items, sortby } = this.props.comments;

@@ -23,6 +23,7 @@ export const deletePost = postId => async dispatch => {
     type: DELETE_POST,
     payload: response
   });
+  return response;
 };
 
 export const createNewPost = post => async dispatch => {
