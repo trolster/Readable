@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 import sortBy from "lodash.sortby";
 import moment from "moment";
 import { Segment, Container, Comment, Header } from "semantic-ui-react";
@@ -15,7 +16,8 @@ class Post extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      editing: false
+      editing: false,
+      redirect: false
     };
     this.handleEditingStateChange = this.handleEditingStateChange.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
@@ -34,12 +36,18 @@ class Post extends Component {
     // If the user navigates to the page from a bookmark, we load post and
     // comments.
     if (!this.props.posts.items[this.props.postId]) {
-      this.props.getPostById(this.props.postId);
+      this.props.getPostById(this.props.postId).catch(response => {
+        // Redirect if the post doesn't exist.
+        this.setState({ redirect: true });
+      });
       this.props.getCommentsByPostId(this.props.postId);
     }
   }
 
   render() {
+    if (this.state.redirect) {
+      return <Redirect to="/404" error={this.state.error} />;
+    }
     const post = this.props.posts.items[this.props.postId];
     const { items, sortby } = this.props.comments;
     const comments = sortBy(

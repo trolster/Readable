@@ -7,4 +7,5 @@ export const getCategories = () => async dispatch => {
     type: GET_CATEGORIES,
     payload: response.categories
   });
+  return response;
 };

@@ -71,7 +71,7 @@ export const getPostById = postId => async dispatch => {
     type: GET_POST_BY_ID,
     payload: response
   });
-  return postId;
+  return response;
 };
 
 export const setPostSort = sort => ({
