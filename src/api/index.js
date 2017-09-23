@@ -1,12 +1,14 @@
 // API utility functions
+
+const API_ROOT = "http://localhost:3001";
+
 const headers = {
   "Content-Type": "application/json",
   Accept: "application/json",
   Authorization: "Readable"
 };
 
-const API_ROOT = "http://localhost:3001";
-
+// Common function for calling the API
 const callApi = (url, options) => {
   return fetch(`${API_ROOT}/${url}`, options).then(res =>
     res.json().then(json => {
@@ -18,10 +20,34 @@ const callApi = (url, options) => {
   );
 };
 
-// API requests
+// Get categories, posts and comments
+export const fetchCategories = () => {
+  return callApi("categories", { headers });
+};
+
+export const fetchPostById = postId => {
+  return callApi(`posts/${postId}`, { headers });
+};
+
+export const fetchPostsByCategory = category => {
+  const path = category === "all" ? "posts" : `${category}/posts`;
+  return callApi(path, { headers });
+};
+
+export const fetchCommentsByPost = postId => {
+  return callApi(`posts/${postId}/comments`, { headers });
+};
+
+// Vote on posts and comments
+export const saveVoteScore = (itemType, voteType, id) => {
+  return callApi(`${itemType}/${id}`, {
+    headers,
+    method: "POST",
+    body: JSON.stringify({ option: voteType })
+  });
+};
 
 // Create posts and comments
-
 export const saveNewPost = post => {
   return callApi("posts", {
     headers,
@@ -35,21 +61,6 @@ export const saveNewComment = comment => {
     headers,
     method: "POST",
     body: JSON.stringify({ ...comment })
-  });
-};
-
-// Delete posts and comments
-export const removePost = postId => {
-  return callApi(`posts/${postId}`, {
-    headers,
-    method: "DELETE"
-  });
-};
-
-export const removeComment = commentId => {
-  return callApi(`comments/${commentId}`, {
-    headers,
-    method: "DELETE"
   });
 };
 
@@ -72,29 +83,17 @@ export const saveEditedComment = comment => {
   });
 };
 
-// Vote on posts and comments
-export const saveVoteScore = (itemType, voteType, id) => {
-  return callApi(`${itemType}/${id}`, {
+// Delete posts and comments
+export const removePost = postId => {
+  return callApi(`posts/${postId}`, {
     headers,
-    method: "POST",
-    body: JSON.stringify({ option: voteType })
+    method: "DELETE"
   });
 };
 
-// Get categories, posts and comments
-export const fetchCategories = () => {
-  return callApi("categories", { headers });
-};
-
-export const fetchPostById = postId => {
-  return callApi(`posts/${postId}`, { headers });
-};
-
-export const fetchPostsByCategory = category => {
-  const path = category === "all" ? "posts" : `${category}/posts`;
-  return callApi(path, { headers });
-};
-
-export const fetchCommentsByPost = postId => {
-  return callApi(`posts/${postId}/comments`, { headers });
+export const removeComment = commentId => {
+  return callApi(`comments/${commentId}`, {
+    headers,
+    method: "DELETE"
+  });
 };
