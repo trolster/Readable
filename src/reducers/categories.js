@@ -1,8 +1,8 @@
-import { GET_CATEGORIES } from "../actions/constants";
+import * as constants from "../actions/constants";
 
 export default (state = [], action) => {
   switch (action.type) {
-    case GET_CATEGORIES:
+    case constants.GET_CATEGORIES:
       return action.payload;
     default:
       return state;
