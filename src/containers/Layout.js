@@ -12,6 +12,7 @@ class Layout extends Component {
   componentDidMount() {
     const { category } = this.props.match.params;
     this.props.getCategories().then(({ categories }) => {
+      // If category is undefined we're on root, so we can return.
       if (category === undefined) {
         return;
       }
