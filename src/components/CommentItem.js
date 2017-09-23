@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import moment from "moment";
 import { Comment } from "semantic-ui-react";
 import { getCommentsByPostId, setCommentSort, deleteComment } from "../actions";
 import Votes from "./Votes";
 import CommentForm from "./CommentForm";
+import DateFromTimestamp from "./DateFromTimestamp";
 
 class Post extends Component {
   constructor(props) {
@@ -36,7 +36,7 @@ class Post extends Component {
           <Comment.Content>
             <Comment.Author as="a">{author}</Comment.Author>
             <Comment.Metadata>
-              posted {moment(timestamp).fromNow()}
+              <DateFromTimestamp timestamp={timestamp} />
             </Comment.Metadata>
             <Comment.Text>{body}</Comment.Text>
             <Comment.Actions>

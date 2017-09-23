@@ -2,12 +2,12 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import sortBy from "lodash.sortby";
-import moment from "moment";
 import { Comment, Header } from "semantic-ui-react";
 import { deletePost } from "../actions";
 import Votes from "./Votes";
 import Sort from "./Sort";
 import CommentItem from "./CommentItem";
+import DateFromTimestamp from "./DateFromTimestamp";
 
 class Post extends Component {
   constructor(props) {
@@ -44,10 +44,12 @@ class Post extends Component {
           <Comment style={{ marginLeft: "15px" }}>
             <Comment.Avatar src="http://via.placeholder.com/35" />
             <Comment.Content>
-              <Comment.Author>{post.author}</Comment.Author>
-              <Comment.Metadata>
-                posted {moment(post.timestamp).fromNow()}
-              </Comment.Metadata>
+              <Comment.Author>
+                {post.author}
+                <Comment.Metadata>
+                  <DateFromTimestamp timestamp={post.timestamp} />
+                </Comment.Metadata>
+              </Comment.Author>
               <Header as="h3" style={{ margin: ".33em 0" }}>
                 {post.title}
               </Header>

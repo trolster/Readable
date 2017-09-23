@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import moment from "moment";
 import { Comment, Header, Icon } from "semantic-ui-react";
 import { deletePost } from "../actions";
 import Votes from "./Votes";
+import DateFromTimestamp from "./DateFromTimestamp";
 
 class PostStub extends Component {
   state = {
@@ -28,7 +28,7 @@ class PostStub extends Component {
               <Comment.Author>
                 {post.author}
                 <Comment.Metadata>
-                  posted {moment(post.timestamp).fromNow()}
+                  <DateFromTimestamp timestamp={post.timestamp} />
                 </Comment.Metadata>
               </Comment.Author>
               <Comment.Metadata style={{ display: "block", margin: ".33em 0" }}>
