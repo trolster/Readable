@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { getCategories } from "../actions/categories";
+import { getCategories } from "../actions";
 import { Post, Posts, Navigation } from "../components";
 
 class Layout extends Component {

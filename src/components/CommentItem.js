@@ -2,11 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import moment from "moment";
 import { Comment } from "semantic-ui-react";
-import {
-  getCommentsByPostId,
-  setCommentSort,
-  deleteComment
-} from "../actions/comments";
+import { getCommentsByPostId, setCommentSort, deleteComment } from "../actions";
 import Votes from "./Votes";
 import CommentForm from "./CommentForm";
 

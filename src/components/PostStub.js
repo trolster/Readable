@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import { Comment, Header, Icon } from "semantic-ui-react";
-import { deletePost } from "../actions/posts";
+import { deletePost } from "../actions";
 import Votes from "./Votes";
 
 class PostStub extends Component {

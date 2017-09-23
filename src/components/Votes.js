@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Icon } from "semantic-ui-react";
-import { voteOnPost } from "../actions/posts";
-import { voteOnComment } from "../actions/comments";
+import { voteOnPost, voteOnComment } from "../actions";
 
 class Votes extends Component {
   itemType = this.props.postId ? "posts" : "comments";

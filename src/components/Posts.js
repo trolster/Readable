@@ -2,9 +2,12 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import sortBy from "lodash.sortby";
 import startCase from "lodash.startcase";
-import { getPostsByCategory, setPostSort } from "../actions/posts";
-import { getCommentsByPostIdList } from "../actions/comments";
 import { Segment, Container, Header, Comment } from "semantic-ui-react";
+import {
+  getPostsByCategory,
+  setPostSort,
+  getCommentsByPostIdList
+} from "../actions";
 import Sort from "./Sort";
 import PostForm from "./PostForm";
 import PostStub from "./PostStub";

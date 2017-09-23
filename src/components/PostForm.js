@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Segment, Form, Button, Select } from "semantic-ui-react";
 import { connect } from "react-redux";
-import { editPost, createNewPost } from "../actions/posts";
+import { editPost, createNewPost } from "../actions";
 
 const defaultPost = {
   author: "",
