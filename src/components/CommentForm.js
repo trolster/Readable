@@ -15,11 +15,6 @@ class CommentForm extends Component {
     this.setState({ comment: { ...this.state.comment, [name]: value } });
   };
 
-  handleDelete = e => {
-    e.preventDefault();
-    console.log("deleted comment");
-  };
-
   handleSubmit = e => {
     e.preventDefault();
     // If we are editing an existing comment we also need to change the state
@@ -29,7 +24,7 @@ class CommentForm extends Component {
       this.props.editComment(this.state.comment);
     } else {
       this.props.createComment(this.state.comment);
-      // reset the comment
+      // reset the comment form.
       this.setState({
         comment: { ...defaultComment, parentId: this.props.postId }
       });
@@ -51,7 +46,6 @@ class CommentForm extends Component {
 
   render() {
     const { author, body } = this.state.comment;
-
     return (
       <Form reply>
         <Form.Input
