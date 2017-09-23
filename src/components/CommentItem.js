@@ -2,11 +2,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Comment } from "semantic-ui-react";
 import { getCommentsByPostId, setCommentSort, deleteComment } from "../actions";
-import Votes from "./Votes";
-import CommentForm from "./CommentForm";
-import DateFromTimestamp from "./DateFromTimestamp";
+import { Votes, CommentForm, DateFromTimestamp } from "./";
 
-class Post extends Component {
+class CommentItem extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -21,15 +19,23 @@ class Post extends Component {
   }
 
   handleEditingStateChange(e) {
-    if (e) e.preventDefault();
+    if (e) {
+      e.preventDefault();
+    }
     this.setState({ editing: !this.state.editing });
   }
 
   render() {
-    const { id, author, timestamp, body } = this.props.comments.items[
-      this.props.commentId
-    ];
-    const Item = () => (
+    const comment = this.props.comments.items[this.props.commentId];
+    const { id, author, timestamp, body } = comment;
+    if (this.state.editing)
+      return (
+        <CommentForm
+          commentId={id}
+          handleEditingStateChange={this.handleEditingStateChange}
+        />
+      );
+    return (
       <div style={{ display: "flex", flexAlign: "row" }} key={id}>
         <Votes commentId={id} />
         <Comment style={{ marginLeft: "15px" }}>
@@ -51,14 +57,6 @@ class Post extends Component {
         </Comment>
       </div>
     );
-    if (this.state.editing)
-      return (
-        <CommentForm
-          commentId={id}
-          handleEditingStateChange={this.handleEditingStateChange}
-        />
-      );
-    return <Item />;
   }
 }
 
@@ -66,4 +64,4 @@ export default connect(state => state, {
   getCommentsByPostId,
   setCommentSort,
   deleteComment
-})(Post);
+})(CommentItem);
