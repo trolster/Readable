@@ -25,10 +25,32 @@ class PostList extends Component {
 
   render() {
     const { items, sortby } = this.props.posts;
-    const posts = sortBy(Object.values(items), sortby).reverse();
     if (!this.state.loaded) {
       return <Spinner />;
     }
+    if (!items.length) {
+      return (
+        <Segment basic>
+          <Container text>
+            <Header as="h3">{startCase(this.props.category)} Posts</Header>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                flexFlow: "column",
+                height: "20vh",
+                color: "#444"
+              }}
+            >
+              <h4>Be the first to write a post in this category!</h4>
+            </div>
+            <PostForm category={this.props.category} />
+          </Container>
+        </Segment>
+      );
+    }
+    const posts = sortBy(Object.values(items), sortby).reverse();
     return (
       <Segment basic>
         <Container text>
