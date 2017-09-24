@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
 import Layout from "./Layout";
 import FourOhFour from "./FourOhFour";
+import "../App.css";
 
 export default class App extends Component {
   render() {

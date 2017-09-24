@@ -1,0 +1,9 @@
+.ui.selection.dropdown {
+  background: transparent;
+  border: none;
+  color: #2185d0;
+}
+
+.ui.selection.active.dropdown {
+  box-shadow: none;
+}

@@ -54,8 +54,10 @@ class PostList extends Component {
     return (
       <Segment basic>
         <Container text>
-          <Header as="h3">{startCase(this.props.category)} Posts</Header>
           {posts.length > 1 && <Sort itemType="posts" />}
+          <Header as="h3" dividing>
+            {startCase(this.props.category)} Posts
+          </Header>
           <Comment.Group>
             {posts.map(post => <PostStub postId={post.id} key={post.id} />)}
           </Comment.Group>
