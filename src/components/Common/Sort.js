@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { setCommentSort, setPostSort } from "../actions";
+import { setCommentSort, setPostSort } from "../../actions";
 import { Form } from "semantic-ui-react";
 
 const sortOptions = [
