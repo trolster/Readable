@@ -1,4 +1,6 @@
 import React from "react";
 import moment from "moment";
 
-export default props => <span>posted {moment(props.timestamp).fromNow()}</span>;
+export default props => (
+  <span>Posted {moment(props.timestamp).calendar()}</span>
+);

@@ -12,19 +12,21 @@ class NavBar extends Component {
               <Menu.Item as="a" name="Home" href="/">
                 Readable
               </Menu.Item>
-              <Dropdown item text="Select Category">
-                <Dropdown.Menu>
-                  {this.props.categories.map(category => (
-                    <Dropdown.Item
-                      key={category.name}
-                      as="a"
-                      href={`/${category.path}`}
-                      active={this.props.activeCategory === category.name}
-                      content={category.name}
-                    />
-                  ))}
-                </Dropdown.Menu>
-              </Dropdown>
+              {!!this.props.categories.length && (
+                <Dropdown item text="Select Category">
+                  <Dropdown.Menu>
+                    {this.props.categories.map(category => (
+                      <Dropdown.Item
+                        key={category.name}
+                        as="a"
+                        href={`/${category.path}`}
+                        active={this.props.activeCategory === category.name}
+                        content={category.name}
+                      />
+                    ))}
+                  </Dropdown.Menu>
+                </Dropdown>
+              )}
             </Menu>
           </Grid.Column>
         </Grid.Row>
