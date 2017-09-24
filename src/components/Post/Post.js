@@ -6,20 +6,7 @@ import { getPostById, getCommentsByPostId } from "../../actions";
 import { PostForm, PostItem, CommentForm, Spinner } from "../";
 
 class Post extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      editing: false,
-      redirect: false
-    };
-    this.handleEditingStateChange = this.handleEditingStateChange.bind(this);
-  }
-
-  handleEditingStateChange(e) {
-    e.preventDefault();
-    this.setState({ editing: !this.state.editing });
-  }
-
+  state = { redirect: false };
   componentDidMount() {
     // If the user navigates to the page from a bookmark, we load post and
     // comments.
@@ -42,18 +29,7 @@ class Post extends Component {
       return (
         <Segment basic>
           <Container text>
-            {!this.state.editing && (
-              <PostItem
-                postId={post.id}
-                handleEditingStateChange={this.handleEditingStateChange}
-              />
-            )}
-            {this.state.editing && (
-              <PostForm
-                postId={post.id}
-                handleEditingStateChange={this.handleEditingStateChange}
-              />
-            )}
+            <PostItem postId={post.id} />
             <Header as="h3" dividing>
               Add a Comment
             </Header>

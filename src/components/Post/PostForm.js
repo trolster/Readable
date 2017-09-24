@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Segment, Form, Button, Select } from "semantic-ui-react";
+import { Form, Button, Select } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { editPost, createNewPost } from "../../actions";
 
@@ -36,59 +36,57 @@ class PostForm extends Component {
     const { author, title, body } = this.state.post;
     const category = this.props.category === "all" ? "" : this.props.category;
     return (
-      <Segment>
-        <Form reply style={{ margin: "15px 0 0 15px" }}>
-          <Form.Group>
-            <Form.Field
-              control={Select}
-              options={this.props.categories.map(category => ({
-                key: category.name,
-                text: category.name,
-                value: category.name
-              }))}
-              value={this.state.post.category || category}
-              name="category"
-              placeholder="Category"
-              onChange={this.handleChange}
-              disabled={this.state.editing}
-            />
-            <Form.Input
-              placeholder="Name"
-              name="author"
-              value={author}
-              onChange={this.handleChange}
-              disabled={this.state.editing}
-            />
-          </Form.Group>
+      <Form>
+        <Form.Group>
+          <Form.Field
+            control={Select}
+            options={this.props.categories.map(category => ({
+              key: category.name,
+              text: category.name,
+              value: category.name
+            }))}
+            value={this.state.post.category || category}
+            name="category"
+            placeholder="Category"
+            onChange={this.handleChange}
+            disabled={this.state.editing}
+          />
           <Form.Input
-            placeholder="Title"
-            name="title"
-            value={title}
+            placeholder="Name"
+            name="author"
+            value={author}
             onChange={this.handleChange}
+            disabled={this.state.editing}
           />
-          <Form.TextArea
-            placeholder="Write your post..."
-            name="body"
-            value={body}
-            onChange={this.handleChange}
-          />
+        </Form.Group>
+        <Form.Input
+          placeholder="Title"
+          name="title"
+          value={title}
+          onChange={this.handleChange}
+        />
+        <Form.TextArea
+          placeholder="Write your post..."
+          name="body"
+          value={body}
+          onChange={this.handleChange}
+        />
+        <Button
+          content={this.state.editing ? "Submit" : "Add New Post"}
+          labelPosition="left"
+          icon="edit"
+          primary
+          onClick={this.handleSubmit}
+        />
+        {this.state.editing && (
           <Button
-            content={this.state.editing ? "Submit" : "Add New Post"}
-            labelPosition="left"
-            icon="edit"
-            primary
-            onClick={this.handleSubmit}
+            content="Cancel"
+            basic
+            floated="right"
+            onClick={this.props.handleEditingStateChange}
           />
-          {this.state.editing && (
-            <Button
-              content="Cancel"
-              basic
-              floated="right"
-              onClick={this.props.handleEditingStateChange}
-            />
-          )}
-        </Form>
-      </Segment>
+        )}
+      </Form>
     );
   }
 }

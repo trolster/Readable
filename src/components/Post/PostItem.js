@@ -4,7 +4,7 @@ import { Redirect } from "react-router-dom";
 import sortBy from "lodash.sortby";
 import { Comment, Header } from "semantic-ui-react";
 import { deletePost } from "../../actions";
-import { CommentItem, Votes, Sort, DateFromTimestamp } from "../";
+import { CommentItem, PostForm, Votes, Sort, DateFromTimestamp } from "../";
 
 class Post extends Component {
   constructor(props) {
@@ -14,6 +14,12 @@ class Post extends Component {
       redirect: false
     };
     this.handleDelete = this.handleDelete.bind(this);
+    this.handleEditingStateChange = this.handleEditingStateChange.bind(this);
+  }
+
+  handleEditingStateChange(e) {
+    e.preventDefault();
+    this.setState({ editing: !this.state.editing });
   }
 
   handleDelete() {
@@ -40,32 +46,47 @@ class Post extends Component {
         <Comment.Group>
           <Comment style={{ marginLeft: "15px" }}>
             <Comment.Avatar src="http://via.placeholder.com/35" />
-            <Comment.Content>
-              <Comment.Author>
-                {post.author}
-                <Comment.Metadata>
-                  <DateFromTimestamp timestamp={post.timestamp} />
-                </Comment.Metadata>
-              </Comment.Author>
-              <Header as="h3" style={{ margin: ".33em 0" }}>
-                {post.title}
-              </Header>
-              <Comment.Text>{post.body}</Comment.Text>
-              <Comment.Actions>
-                <Comment.Action onClick={this.props.handleEditingStateChange}>
-                  Edit
-                </Comment.Action>
-                <Comment.Action onClick={this.handleDelete}>
-                  Delete
-                </Comment.Action>
-              </Comment.Actions>
-            </Comment.Content>
+            {!this.state.editing && (
+              <Comment.Content>
+                <Comment.Author>
+                  {post.author}
+                  <Comment.Metadata>
+                    <DateFromTimestamp timestamp={post.timestamp} />
+                  </Comment.Metadata>
+                </Comment.Author>
+                <Header as="h3" style={{ margin: ".33em 0" }}>
+                  {post.title}
+                </Header>
+                <Comment.Text>{post.body}</Comment.Text>
+                <Comment.Actions>
+                  <Comment.Action onClick={this.handleEditingStateChange}>
+                    Edit
+                  </Comment.Action>
+                  <Comment.Action onClick={this.handleDelete}>
+                    Delete
+                  </Comment.Action>
+                </Comment.Actions>
+              </Comment.Content>
+            )}
+            {this.state.editing && (
+              <Comment.Content>
+                <PostForm
+                  className="post-form"
+                  postId={post.id}
+                  handleEditingStateChange={this.handleEditingStateChange}
+                />
+              </Comment.Content>
+            )}
             {comments && (
               <Comment.Group>
-                {comments.length > 1 && <Sort itemType="comments" />}
-                <Header as="h3" dividing className="comment-header">
-                  Comments
-                </Header>
+                {comments.length > 1 && (
+                  <div>
+                    <Sort itemType="comments" />
+                    <Header as="h3" dividing className="comment-header">
+                      Comments
+                    </Header>
+                  </div>
+                )}
                 {comments.map(comment => {
                   return (
                     <CommentItem key={comment.id} commentId={comment.id} />

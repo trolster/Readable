@@ -16,3 +16,15 @@
 .ui.dividing.header.comment-header {
   margin-top: 5px;
 }
+
+.ui.disabled.selection.dropdown {
+  padding: 5px 0 0 14px;
+}
+
+.ui.form {
+  margin: 15px 0 0 15px;
+}
+
+.ui.comments .ui.form {
+  margin: 0;
+}
