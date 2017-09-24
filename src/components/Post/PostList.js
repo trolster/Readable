@@ -61,6 +61,9 @@ class PostList extends Component {
           <Comment.Group>
             {posts.map(post => <PostStub postId={post.id} key={post.id} />)}
           </Comment.Group>
+          <Header as="h3" dividing>
+            Add a Post
+          </Header>
           <PostForm category={this.props.category} />
         </Container>
       </Segment>
