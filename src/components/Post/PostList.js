@@ -33,16 +33,7 @@ class PostList extends Component {
         <Segment basic>
           <Container text>
             <Header as="h3">{startCase(this.props.category)} Posts</Header>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                flexFlow: "column",
-                height: "20vh",
-                color: "#444"
-              }}
-            >
+            <div className="empty-post-list">
               <h4>Be the first to write a post in this category!</h4>
             </div>
             <PostForm category={this.props.category} />
@@ -54,10 +45,12 @@ class PostList extends Component {
     return (
       <Segment basic>
         <Container text>
-          {posts.length > 1 && <Sort itemType="posts" />}
-          <Header as="h3" dividing>
-            {startCase(this.props.category)} Posts
-          </Header>
+          <header className="post-list-header">
+            {posts.length > 1 && <Sort itemType="posts" />}
+            <Header as="h3" dividing>
+              {startCase(this.props.category)} Posts
+            </Header>
+          </header>
           <Comment.Group>
             {posts.map(post => <PostStub postId={post.id} key={post.id} />)}
           </Comment.Group>

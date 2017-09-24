@@ -18,10 +18,10 @@ class PostStub extends Component {
       comment => comment.parentId === post.id
     ).length;
     return (
-      <div style={{ display: "flex", flexAlign: "row" }} key={post.id}>
+      <div className="post-list-item" key={post.id}>
         <Votes postId={post.id} />
         <Comment.Group>
-          <Comment style={{ marginLeft: "15px" }}>
+          <Comment>
             <Comment.Avatar src="http://via.placeholder.com/35" />
             <Comment.Content>
               <Comment.Author>
@@ -30,17 +30,12 @@ class PostStub extends Component {
                   <DateFromTimestamp timestamp={post.timestamp} />
                 </Comment.Metadata>
               </Comment.Author>
-              <Comment.Metadata style={{ display: "block", margin: ".33em 0" }}>
-                <Icon
-                  name="comment outline"
-                  style={{ margin: "0 4px -4px 0" }}
-                />
+              <Comment.Metadata className="comment-count">
+                <Icon name="comment outline" />
                 {commentCount} Comments
               </Comment.Metadata>
               <Link to={`/${post.category}/${post.id}`}>
-                <Header as="h3" style={{ margin: ".33em 0" }}>
-                  {post.title}
-                </Header>
+                <Header as="h2">{post.title}</Header>
               </Link>
               <Comment.Text>{post.body.substring(0, 120)}...</Comment.Text>
               <Comment.Actions>

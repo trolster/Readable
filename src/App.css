@@ -1,5 +1,39 @@
-.sortby {
-  float: right;
+.ui .comment .metadata.comment-count {
+  margin: 5px 0 10px 0;
+}
+
+.ui .comment .comment.outline.icon {
+  margin-right: 3px;
+}
+
+.post-list-item,
+.comment-list-item {
+  display: flex;
+  flex-align: row;
+}
+
+.ui.comments .comment {
+  margin-left: 15px;
+}
+
+.empty-post-list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column;
+  height: 30vh;
+  color: #444;
+}
+
+.post-list-header,
+.comment-list-header {
+  position: relative;
+}
+
+.sortby.ui.form {
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 
 .sortby .ui.selection.dropdown {
@@ -13,16 +47,8 @@
   box-shadow: none;
 }
 
-.ui.dividing.header.comment-header {
-  margin-top: 5px;
-}
-
 .ui.disabled.selection.dropdown {
   padding: 5px 0 0 14px;
-}
-
-.ui.form {
-  margin: 15px 0 0 15px;
 }
 
 .ui.comments .ui.form {

@@ -36,7 +36,7 @@ class PostForm extends Component {
     const { author, title, body } = this.state.post;
     const category = this.props.category === "all" ? "" : this.props.category;
     return (
-      <Form>
+      <Form reply>
         <Form.Group>
           <Form.Field
             control={Select}

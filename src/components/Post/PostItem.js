@@ -41,10 +41,10 @@ class Post extends Component {
       sortby
     ).reverse();
     return (
-      <div style={{ display: "flex", flexAlign: "row" }} key={post.id}>
+      <div className="post-list-item" key={post.id}>
         <Votes postId={post.id} />
         <Comment.Group>
-          <Comment style={{ marginLeft: "15px" }}>
+          <Comment>
             <Comment.Avatar src="http://via.placeholder.com/35" />
             {!this.state.editing && (
               <Comment.Content>
@@ -54,9 +54,7 @@ class Post extends Component {
                     <DateFromTimestamp timestamp={post.timestamp} />
                   </Comment.Metadata>
                 </Comment.Author>
-                <Header as="h3" style={{ margin: ".33em 0" }}>
-                  {post.title}
-                </Header>
+                <Header as="h2">{post.title}</Header>
                 <Comment.Text>{post.body}</Comment.Text>
                 <Comment.Actions>
                   <Comment.Action onClick={this.handleEditingStateChange}>
@@ -79,14 +77,12 @@ class Post extends Component {
             )}
             {comments && (
               <Comment.Group>
-                {comments.length > 1 && (
-                  <div>
-                    <Sort itemType="comments" />
-                    <Header as="h3" dividing className="comment-header">
-                      Comments
-                    </Header>
-                  </div>
-                )}
+                <header className="comment-list-header">
+                  {comments.length > 1 && <Sort itemType="comments" />}
+                  <Header as="h3" dividing className="comment-header">
+                    Comments
+                  </Header>
+                </header>
                 {comments.map(comment => {
                   return (
                     <CommentItem key={comment.id} commentId={comment.id} />

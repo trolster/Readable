@@ -40,9 +40,9 @@ class CommentItem extends Component {
         />
       );
     return (
-      <div style={{ display: "flex", flexAlign: "row" }} key={id}>
+      <div className="comment-list-item" key={id}>
         <Votes commentId={id} />
-        <Comment style={{ marginLeft: "15px" }}>
+        <Comment>
           <Comment.Content>
             <Comment.Author as="a">{author}</Comment.Author>
             <Comment.Metadata>
