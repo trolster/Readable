@@ -7,13 +7,12 @@ import {
   getPostsByCategory,
   setPostSort,
   getCommentsByPostIdList
-} from "../actions";
-import Sort from "./Sort";
-import PostForm from "./PostForm";
-import PostStub from "./PostStub";
-import Spinner from "./Spinner";
+} from "../../actions";
+import { PostForm, PostStub } from "../";
+import Sort from "../Sort";
+import Spinner from "../Spinner";
 
-class Posts extends Component {
+class PostList extends Component {
   state = {
     loaded: false
   };
@@ -51,4 +50,4 @@ export default connect(state => state, {
   getPostsByCategory,
   setPostSort,
   getCommentsByPostIdList
-})(Posts);
+})(PostList);

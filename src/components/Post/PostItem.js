@@ -3,11 +3,11 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import sortBy from "lodash.sortby";
 import { Comment, Header } from "semantic-ui-react";
-import { deletePost } from "../actions";
-import Votes from "./Votes";
-import Sort from "./Sort";
-import CommentItem from "./CommentItem";
-import DateFromTimestamp from "./DateFromTimestamp";
+import { deletePost } from "../../actions";
+import Votes from "../Votes";
+import Sort from "../Sort";
+import CommentItem from "../CommentItem";
+import DateFromTimestamp from "../DateFromTimestamp";
 
 class Post extends Component {
   constructor(props) {

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { getCategories } from "../actions";
-import { Post, Posts, Navigation } from "../components";
+import { Post, PostList, Navigation } from "../components";
 
 class Layout extends Component {
   state = {
@@ -32,7 +32,7 @@ class Layout extends Component {
     return (
       <div>
         <Navigation category={category} />
-        {post_id ? <Post postId={post_id} /> : <Posts category={category} />}
+        {post_id ? <Post postId={post_id} /> : <PostList category={category} />}
       </div>
     );
   }

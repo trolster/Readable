@@ -2,11 +2,10 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { Segment, Container } from "semantic-ui-react";
-import { getPostById, getCommentsByPostId } from "../actions";
-import PostForm from "./PostForm";
-import PostItem from "./PostItem";
-import CommentForm from "./CommentForm";
-import Spinner from "./Spinner";
+import { getPostById, getCommentsByPostId } from "../../actions";
+import { PostForm, PostItem } from "../";
+import CommentForm from "../CommentForm";
+import Spinner from "../Spinner";
 
 class Post extends Component {
   constructor(props) {
