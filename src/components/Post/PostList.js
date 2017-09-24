@@ -8,9 +8,7 @@ import {
   setPostSort,
   getCommentsByPostIdList
 } from "../../actions";
-import { PostForm, PostStub } from "../";
-import Sort from "../Sort";
-import Spinner from "../Spinner";
+import { PostForm, PostStub, Sort, Spinner } from "../";
 
 class PostList extends Component {
   state = {

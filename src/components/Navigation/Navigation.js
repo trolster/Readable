@@ -1,5 +1,5 @@
 import React from "react";
-import { NavBar, SideNav } from "./";
+import { NavBar, SideNav } from "../";
 
 export default props => (
   <nav>

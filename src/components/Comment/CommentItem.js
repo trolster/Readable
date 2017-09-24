@@ -1,8 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Comment } from "semantic-ui-react";
-import { getCommentsByPostId, setCommentSort, deleteComment } from "../actions";
-import { Votes, CommentForm, DateFromTimestamp } from "./";
+import {
+  getCommentsByPostId,
+  setCommentSort,
+  deleteComment
+} from "../../actions";
+import { Votes, CommentForm, DateFromTimestamp } from "../";
 
 class CommentItem extends Component {
   constructor(props) {

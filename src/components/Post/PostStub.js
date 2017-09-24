@@ -3,8 +3,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { Comment, Header, Icon } from "semantic-ui-react";
 import { deletePost } from "../../actions";
-import Votes from "../Votes";
-import DateFromTimestamp from "../DateFromTimestamp";
+import { Votes, DateFromTimestamp } from "../";
 
 class PostStub extends Component {
   state = {
