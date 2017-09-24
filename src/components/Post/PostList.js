@@ -28,7 +28,7 @@ class PostList extends Component {
     if (!this.state.loaded) {
       return <Spinner />;
     }
-    if (!items.length) {
+    if (!Object.keys(items).length) {
       return (
         <Segment basic>
           <Container text>
