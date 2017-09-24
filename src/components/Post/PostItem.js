@@ -63,6 +63,9 @@ class Post extends Component {
             {comments && (
               <Comment.Group>
                 {comments.length > 1 && <Sort itemType="comments" />}
+                <Header as="h3" dividing className="comment-header">
+                  Comments
+                </Header>
                 {comments.map(comment => {
                   return (
                     <CommentItem key={comment.id} commentId={comment.id} />

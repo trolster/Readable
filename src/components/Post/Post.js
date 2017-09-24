@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { Segment, Container } from "semantic-ui-react";
+import { Segment, Container, Header } from "semantic-ui-react";
 import { getPostById, getCommentsByPostId } from "../../actions";
 import { PostForm, PostItem, CommentForm, Spinner } from "../";
 
@@ -54,6 +54,9 @@ class Post extends Component {
                 handleEditingStateChange={this.handleEditingStateChange}
               />
             )}
+            <Header as="h3" dividing>
+              Add a Comment
+            </Header>
             <CommentForm postId={post.id} />
           </Container>
         </Segment>

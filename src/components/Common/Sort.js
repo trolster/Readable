@@ -18,7 +18,7 @@ class Sort extends Component {
   };
   render() {
     return (
-      <Form style={{ float: "right" }} size="mini">
+      <Form className="sortby" size="mini">
         <Form.Select
           inline
           options={sortOptions}

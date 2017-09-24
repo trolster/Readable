@@ -1,9 +1,18 @@
-.ui.selection.dropdown {
+.sortby {
+  float: right;
+}
+
+.sortby .ui.selection.dropdown {
   background: transparent;
   border: none;
   color: #2185d0;
 }
 
-.ui.selection.active.dropdown {
+.sortby .ui.selection.active.dropdown,
+.sortby .ui.selection.active.dropdown:hover {
   box-shadow: none;
+}
+
+.sortby .ui.dividing.header.comment-header {
+  margin-top: 5px;
 }
