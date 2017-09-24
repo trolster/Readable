@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Menu, Dropdown, Grid, Button, Sidebar } from "semantic-ui-react";
+import { Menu, Grid, Button, Sidebar } from "semantic-ui-react";
 
-class Navigation extends Component {
+class SideNav extends Component {
   state = {
     visible: false
   };
@@ -12,28 +12,6 @@ class Navigation extends Component {
   render() {
     return (
       <Grid>
-        <Grid.Row only="tablet computer">
-          <Grid.Column>
-            <Menu secondary style={{ padding: 10 }}>
-              <Menu.Item as="a" name="Home" href="/">
-                Readable
-              </Menu.Item>
-              <Dropdown item text="Select Category">
-                <Dropdown.Menu>
-                  {this.props.categories.map(category => (
-                    <Dropdown.Item
-                      key={category.name}
-                      as="a"
-                      href={`/${category.path}`}
-                      active={this.props.activeCategory === category.name}
-                      content={category.name}
-                    />
-                  ))}
-                </Dropdown.Menu>
-              </Dropdown>
-            </Menu>
-          </Grid.Column>
-        </Grid.Row>
         <Grid.Row only="mobile">
           <Grid.Column>
             <Menu secondary style={{ padding: "10px 0 0 10px" }}>
@@ -76,4 +54,4 @@ class Navigation extends Component {
   }
 }
 
-export default connect(state => state)(Navigation);
+export default connect(state => state)(SideNav);
