@@ -7,8 +7,7 @@ import { Votes, DateFromTimestamp } from "../";
 
 class PostStub extends Component {
   state = {
-    editing: false,
-    redirect: false
+    editing: false
   };
 
   render() {
@@ -24,9 +23,12 @@ class PostStub extends Component {
           <Comment>
             <Comment.Avatar src="http://via.placeholder.com/35" />
             <Comment.Content>
+              <Link to={`/${post.category}/${post.id}`}>
+                <Header as="h2">{post.title}</Header>
+              </Link>
               <Comment.Author>
-                {post.author}
                 <Comment.Metadata>
+                  Posted by <span className="post-author">{post.author},</span>
                   <DateFromTimestamp timestamp={post.timestamp} />
                 </Comment.Metadata>
               </Comment.Author>
@@ -34,9 +36,6 @@ class PostStub extends Component {
                 <Icon name="comment outline" />
                 {commentCount} Comments
               </Comment.Metadata>
-              <Link to={`/${post.category}/${post.id}`}>
-                <Header as="h2">{post.title}</Header>
-              </Link>
               <Comment.Text>{post.body.substring(0, 120)}...</Comment.Text>
               <Comment.Actions>
                 <Comment.Action href={`/${post.category}/${post.id}`}>
