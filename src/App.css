@@ -1,5 +1,10 @@
 .comment .ui.header {
   margin-bottom: 5px;
+  color: #444;
+}
+
+.comment a .ui.header:hover {
+  color: #2185d0;
 }
 
 .ui.comments .comment .metadata.post-metadata {
