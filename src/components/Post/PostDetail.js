@@ -29,7 +29,7 @@ class PostDetail extends Component {
       return (
         <Segment basic>
           <Container text>
-            <PostItem postId={post.id} />
+            <PostItem postId={post.id} showComments />
             <Header as="h3" dividing>
               Add a Comment
             </Header>

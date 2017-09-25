@@ -2,13 +2,13 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import sortBy from "lodash.sortby";
 import startCase from "lodash.startcase";
-import { Segment, Container, Header, Comment } from "semantic-ui-react";
+import { Segment, Container, Header } from "semantic-ui-react";
 import {
   getPostsByCategory,
   setPostSort,
   getCommentsByPostIdList
 } from "../../actions";
-import { PostForm, PostStub, Sort, Spinner } from "../";
+import { PostForm, PostItem, Sort, Spinner } from "../";
 
 class PostList extends Component {
   state = {
@@ -54,9 +54,7 @@ class PostList extends Component {
               {startCase(this.props.category)} Posts
             </Header>
           </header>
-          <Comment.Group>
-            {posts.map(post => <PostStub postId={post.id} key={post.id} />)}
-          </Comment.Group>
+          {posts.map(post => <PostItem postId={post.id} key={post.id} />)}
           <Header as="h3" dividing>
             Add a Post
           </Header>

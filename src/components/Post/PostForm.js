@@ -37,7 +37,7 @@ class PostForm extends Component {
     const category = this.props.category === "all" ? "" : this.props.category;
     return (
       <Form reply>
-        <Form.Group>
+        <Form.Group style={{ width: "100%" }}>
           <Form.Field
             control={Select}
             options={this.props.categories.map(category => ({

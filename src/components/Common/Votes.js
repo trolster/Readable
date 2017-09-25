@@ -21,6 +21,7 @@ class Votes extends Component {
           flexDirection: "column",
           alignItems: "center",
           width: "30px",
+          flex: "0 0 30px",
           marginTop: "16px"
         }}
       >

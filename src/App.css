@@ -1,17 +1,19 @@
-.post-author {
-  color: black;
+.comment .ui.header {
+  margin-bottom: 5px;
 }
 
-.ui.comments .comment .metadata.comment-count,
-.ui.comments .comment .author .metadata:first-child {
+.ui.comments .comment .metadata.post-metadata {
+  display: block;
   margin-left: 0;
+  margin-bottom: 5px;
 }
 
 .ui .comment .comment.outline.icon {
+  width: auto;
   margin-right: 3px;
 }
 
-.post-list-item,
+.post-item,
 .comment-list-item {
   display: flex;
   flex-align: row;
@@ -19,6 +21,7 @@
 
 .ui.comments .comment {
   margin-left: 15px;
+  width: 100%;
 }
 
 .empty-post-list {
