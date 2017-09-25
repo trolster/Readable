@@ -1,4 +1,4 @@
-export { PostItem, PostForm, PostStub, Post, PostList } from "./Post";
+export { PostItem, PostForm, PostStub, PostDetail, PostList } from "./Post";
 export { CommentForm, CommentItem } from "./Comment";
 export { Navigation, NavBar, SideNav } from "./Navigation";
 export { Sort, Votes, Spinner, DateFromTimestamp } from "./Common";

@@ -5,7 +5,7 @@ import { Segment, Container, Header } from "semantic-ui-react";
 import { getPostById, getCommentsByPostId } from "../../actions";
 import { PostItem, CommentForm, Spinner } from "../";
 
-class Post extends Component {
+class PostDetail extends Component {
   state = { redirect: false };
   componentDidMount() {
     // If the user navigates to the page from a bookmark, we load post and
@@ -45,4 +45,4 @@ class Post extends Component {
 export default connect(state => state, {
   getPostById,
   getCommentsByPostId
-})(Post);
+})(PostDetail);
