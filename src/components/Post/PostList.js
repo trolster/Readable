@@ -24,10 +24,12 @@ class PostList extends Component {
   }
 
   render() {
-    const { items, sortby } = this.props.posts;
     if (!this.state.loaded) {
       return <Spinner />;
     }
+
+    const { items, sortby } = this.props.posts;
+    // If there are no posts we display a message instead.
     if (!Object.keys(items).length) {
       return (
         <Segment basic>
@@ -41,6 +43,7 @@ class PostList extends Component {
         </Segment>
       );
     }
+    // Otherwise we display the posts.
     const posts = sortBy(Object.values(items), sortby).reverse();
     return (
       <Segment basic>
