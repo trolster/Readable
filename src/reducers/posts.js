@@ -23,6 +23,12 @@ export default (
         items: shapePostData(action.payload)
       };
     case constants.GET_POST_BY_ID:
+      if (Object.keys(action.payload).length === 0) {
+        return {
+          ...state,
+          items: null
+        };
+      }
       return {
         ...state,
         items: shapePostData([action.payload])

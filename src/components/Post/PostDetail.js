@@ -6,7 +6,10 @@ import { getPostById, getCommentsByPostId } from "../../actions";
 import { PostItem, CommentForm, Spinner } from "../";
 
 class PostDetail extends Component {
-  state = { redirect: false };
+  state = {
+    redirect: false
+  };
+
   componentDidMount() {
     // If the user navigates to the page from a bookmark, we load post and
     // comments.
