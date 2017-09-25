@@ -13,7 +13,10 @@ class PostForm extends Component {
   state = {
     post: !!this.props.postId
       ? this.props.posts.items[this.props.postId]
-      : { ...defaultPost, category: this.props.category },
+      : {
+          ...defaultPost,
+          category: this.props.category === "all" ? "" : this.props.category
+        },
     editing: !!this.props.postId
   };
 
@@ -34,7 +37,6 @@ class PostForm extends Component {
 
   render() {
     const { author, title, body } = this.state.post;
-    const category = this.props.category === "all" ? "" : this.props.category;
     return (
       <Form reply>
         <Form.Group style={{ width: "100%" }}>
@@ -45,9 +47,9 @@ class PostForm extends Component {
               text: category.name,
               value: category.name
             }))}
-            value={this.state.post.category || category}
+            value={this.state.post.category}
             name="category"
-            placeholder="Category"
+            placeholder="Select a Category..."
             onChange={this.handleChange}
             disabled={this.state.editing}
           />
