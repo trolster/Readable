@@ -1,5 +1,10 @@
-.ui .comment .metadata.comment-count {
-  margin: 5px 0 10px 0;
+.author {
+  margin: 5px 0 0 0;
+}
+
+.ui.comments .comment .metadata.comment-count,
+.ui.comments .comment .author .metadata:first-child {
+  margin-left: 0;
 }
 
 .ui .comment .comment.outline.icon {
@@ -40,6 +45,11 @@
   background: transparent;
   border: none;
   color: #2185d0;
+}
+
+.ui .comment .sortby .text {
+  color: #2185d0;
+  margin-top: 0;
 }
 
 .sortby .ui.selection.active.dropdown,
